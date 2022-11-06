@@ -2,23 +2,56 @@
 
 Caution: this project is in a working process and not been done. Part of the document has not finished.
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-This project is managing to drive Sharp LS050T1SX01 using SSD2828(Solomon Systech) and Altera Cyclone IV EP4CE10F17C8N FPGA with additional components.
 ```
-FPGA   |  <- RGB interface
+Current Progress
+
+[ok] LCD with Specification
+[ok] SSD2828 SPI Transmission and Initialization
+[  ] SSD2828 and LCD MIPI Configuration
+[ok] Circuit Schematic
+[  ] PCB Layout and MIPI Differential Layout
+[  ] First Test and Debug
+[  ] Final Test
+```
+- --
+This project is managing to drive Sharp LS050T1SX01 using SSD2828(Solomon Systech).
+```
+(any)  |  <- RGB interface
        v
        ---->  SSD2828 ------> Sharp LS050T1SX01
        ^                 ^ MIPI DSI
 STM32  |  <- SPI
 ```
 Author: jlywxy<br>
-Document Version: 1.0
+Document Version: 1.0.1
 - --
+## Circuit Schematic Suggestions
 
+1. Use reverse voltage generator IC for LCD AVDD+/-.<br>
+Currently using ICL7660 from Renesas.
+2. To be continued
+- --
+## PCB Layout and Manufacturing Suggestions
+1. For MIPI Differential Layout
+* Do not use LCEDA to tune line length using the tuning function only for single-ended network. Use a more professional tool such as KiCad(in this project) or Altium, then use their tuning function for two lines of the differential, concurrently.
+* The MIPI lines must cross the connector on the reverse side of the connector, and make via holes between the pads in the connector.
+```
+------------------......
+| | | | | | |
+ ø ø ø ø ø ø ......
+ø ø ø ø ø ø 
+ | | | | | | | ......
+------------------
+
+("|"=pad, "ø"=via-holes)
+```
+2. For connector soldering and layout
+* Do not use heat gun to solder plastic components, even if temperature is lower than 220(C).
+* Do not use low temperature soldering tin (accurately 138(C)Bi-Sn), which is not rock-hard then spliting apart and cause <b>rosin joint</b>
+* Make connector direction easy for LCD connection.
+* Make soldering pad bigger to conveniently solder connector on the board.
+3. To be continued
+- --
 ## Overview of the LCM Interface 
 
 ### 1. Display Interface
@@ -43,6 +76,9 @@ This LCM requires 19.8v dual power with each 20mA current without internal backl
 ### 3. Connector
 
 The part number of Mating connector is AYF333135 of Panasonic, which has 31pins with crossing 0.3mm interval.
+
+<b>It's recommended to use other brands of connector, such as FH26W-31S from Hirose, which has more sustainability after soldering by iron.</b>
+
 This is the only one connector on the LCM to provide data/control/backlight lines.
 - --
 
@@ -114,6 +150,10 @@ RRRRRR RRRRGGGG GGGGGGBB BBBBBBBB (30 bits)
 4. LCM
 
 * A abbreviation of Liquid Crystal Module, which includes LCD glass panel and backlight LEDs.
+
+5. Low-Temperature Soldering Tin
+
+* A type of soldering tin which melting point is only 138 celsius high. It has 58% Bismuth(Bi) and 42% Stannum(Sn) to make such a low melting point. This temperature is so important for those not heat-resistant components such as LEDs and MEMS components. However, it's definitely not recommended for connector soldering, which will cause unsoldering and rosin-joint, because this type of soldering tin is fragile.
 
 ### Additional Information of this Project
 From the start of this project, it was considered to use Chinese chips with more functionability as it said: Lontium LT7911D, LT8918, etc., but what's the most confusing is chips of most Chinese makers always did not open to share their product specifications, but only provide those informations to large conpanies or via unofficial way to give to personal DIY makers. 
