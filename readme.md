@@ -29,7 +29,9 @@ Document Version: 1.0.1
 
 1. Use reverse voltage generator IC for LCD AVDD+/-.<br>
 Currently using ICL7660 from Renesas.
-2. To be continued
+2. Put KiCad PWR_FLAG at VBUS/GND at USB-C connector.
+3. Use 3.3v LDO to VDDIO for LCD, SSD2828 and STM32.
+4. To be continued
 - --
 ## PCB Layout and Manufacturing Suggestions
 1. For MIPI Differential Layout
@@ -50,7 +52,28 @@ Currently using ICL7660 from Renesas.
 * Do not use low temperature soldering tin (accurately 138(C)Bi-Sn), which is not rock-hard then spliting apart and cause <b>rosin joint</b>
 * Make connector direction easy for LCD connection.
 * Make soldering pad bigger to conveniently solder connector on the board.
-3. To be continued
+3. For PCB Manufacturing
+* Use KiCad to plot Gerber and drill files, then zip the files and send to manufacture.
+* It is tested using JLCPCB to manufacture the board.
+The gerber settings for JLCPCB should be modified as follow:
+```
+---Gerber Options------------------------
+*[yes] Use Protel filename extensions
+*[no]  Generate Gerber job file
+*[yes] Subtract soldermask from silkscreen
+
+      Coordinate format: 4.6, unit mm
+*[no]  USe extended X2 format(recommended)
+*[no]  Include netlist attributes
+[no]  Disable aperture macros(not recommended)
+
+---Drill Units------------------------
+*[yes] Millimeters
+[no]  Inches
+
+*: modified options compared to the default settings
+```
+4. To be continued
 - --
 ## Overview of the LCM Interface 
 
