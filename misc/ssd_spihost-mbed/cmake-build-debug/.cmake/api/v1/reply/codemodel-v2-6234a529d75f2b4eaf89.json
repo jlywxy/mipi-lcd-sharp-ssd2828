@@ -1,0 +1,60 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.22"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "spihost-mbed",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "spihost-mbed.elf::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-spihost-mbed.elf-Debug-61c10981ea51165b030a.json",
+					"name" : "spihost-mbed.elf",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/jlywxy/project/lcd/projects/mipi-lcd-sharp-ssd2828/misc/ssd_spihost-mbed/cmake-build-debug",
+		"source" : "/Users/jlywxy/project/lcd/projects/mipi-lcd-sharp-ssd2828/misc/ssd_spihost-mbed"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

@@ -1,0 +1,5 @@
+"/Users/jlywxy/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/221.5921.27/CLion.app/Contents/bin/cmake/mac/bin/cmake" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" -S /Users/jlywxy/project/lcd/projects/mipi-lcd-sharp-ssd2828/ssd_stm_spihost/spihost -B /Users/jlywxy/project/lcd/projects/mipi-lcd-sharp-ssd2828/ssd_stm_spihost/spihost/cmake-build-debug
+-- Minimal optimization, debug info included
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/jlywxy/project/lcd/projects/mipi-lcd-sharp-ssd2828/ssd_stm_spihost/spihost/cmake-build-debug

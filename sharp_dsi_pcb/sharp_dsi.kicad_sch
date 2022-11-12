@@ -2510,7 +2510,6 @@
     )
   )
 
-
   (junction (at 124.46 87.63) (diameter 0) (color 0 0 0 0)
     (uuid 05ea16fa-4868-4f62-a456-f4b4a2ef8731)
   )
@@ -3337,6 +3336,10 @@
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid d25faf93-b848-4fc4-9b49-c8f566f2e9e4)
   )
+  (wire (pts (xy 194.31 97.79) (xy 201.93 97.79))
+    (stroke (width 0) (type default) (color 0 0 0 0))
+    (uuid d52ecadc-0723-489b-8834-caec9cf36ac3)
+  )
   (wire (pts (xy 208.28 152.4) (xy 215.9 152.4))
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid d5566d48-26fd-4730-8307-39b37e1567fd)
@@ -3587,7 +3590,7 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 293e6645-29f2-4d18-b173-82fb974ac42d)
   )
-  (label "ST_PB1" (at 201.93 97.79 0)
+  (label "ST_PB1" (at 194.31 97.79 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 2a873b00-d207-46a8-9309-c55b11f3c9bc)
   )

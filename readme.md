@@ -7,10 +7,10 @@ Current Progress
 
 [ok] LCD with Specification
 [ok] SSD2828 SPI Transmission and Initialization
-[  ] SSD2828 and LCD MIPI Configuration
+[working] SSD2828 and LCD MIPI Configuration
 [ok] Circuit Schematic
-[  ] PCB Layout and MIPI Differential Layout
-[  ] First Test and Debug
+[ok] PCB Layout and MIPI Differential Layout
+[working] First Test and Debug
 [  ] Final Test
 ```
 - --
@@ -23,7 +23,7 @@ This project is managing to drive Sharp LS050T1SX01 using SSD2828(Solomon Systec
 STM32  |  <- SPI
 ```
 Author: jlywxy<br>
-Document Version: 1.0.1
+Document Version: 1.0.2
 - --
 ## Circuit Schematic Suggestions
 
@@ -83,9 +83,9 @@ This LCM is using MIPI DSI and DCS interface.
 ```
 Sharp LS050T1SX01
 
-Electrical-Level    | Speed       
+Electrical-Level    | Speed       | Driver IC
 --------------------------------------------------
-1.2v-330mV-MIPI DSI | max 500 MHz 
+1.2v-330mV-MIPI DSI | max 500 MHz | Renesas R63311
 
 Wires                    | VDD Voltage
 --------------------------------------------------
@@ -120,9 +120,10 @@ This is the only one connector on the LCM to provide data/control/backlight line
 
 0. Backlight power on.
 1. LCM VDD on, XRES.
-2. Initialize SSD2828 via SPI, Set LCD characteristics
-2. Initialize LCM by sending DCS init commands to SSD2828 via SPI, then SSD2828 routes data via MIPI LP.
-3. Start data transmission to SSD2828 via RGB interface, then SSD2828 routes data via MIPI HS. / Or, start SSD2828 BIST(Built-In Self Test) without RGB input.
+2. Initialize SSD2828: PLL, VSYNC/HSYNC, ...
+3. Write init conf to LCD via SSD2828 MIPI Packet
+4. Write 0x29,0x11 to LCD
+5. SSD2828 Enters HP Mode
 
 - --
 ## Misc
