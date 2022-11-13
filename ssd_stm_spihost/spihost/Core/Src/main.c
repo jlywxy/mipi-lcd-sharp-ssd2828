@@ -108,35 +108,99 @@ void SSD_SPI_WriteReg(uint8_t reg,uint16_t data,int len){
     uint16_t buf[3]={reg,1<<8|(data&0xff),1<<8|((data>>8)&0xff)};
     SSD_SPI_Write(buf,len+1);
 }
-void SSD_MIPI_WriteShortGeneric(uint8_t reg,uint16_t data,int len){
-    SSD_SPI_WriteReg(0xb7,0x0302,2);
-    SSD_SPI_WriteReg(0xb8,0x0000,2);
 
-    SSD_SPI_WriteReg(0xbc,len,2);
-    SSD_SPI_WriteReg(0xbf,reg|(data<<8),2);
-}
-void SSD_MIPI_WriteShortDCS(uint8_t reg,uint16_t data,int len){
-    SSD_SPI_WriteReg(0xb7,0x0050,2);
-    SSD_SPI_WriteReg(0xb8,0x0000,2);
-
-    SSD_SPI_WriteReg(0xbc,len,2);
-    SSD_SPI_WriteReg(0xbf,reg|(data<<8),2);
-}
 void SSD_MIPI_WriteLongGeneric(uint8_t reg,uint16_t* data,int len){
     SSD_SPI_WriteReg(0xb7,0x0302,2);
     SSD_SPI_WriteReg(0xb8,0x0000,2);
-
     SSD_SPI_WriteReg(0xbc,len,2);
-    if(len>1)SSD_SPI_WriteReg(0xbf,reg|(data[0]<<8),2);
-    if(len>2)SSD_SPI_WriteReg(0xbf,data[1]|(data[2]<<8),2);
+    uint16_t b0[1]={0xbf};
+    SSD_SPI_Write(b0,1);
+    uint16_t b1[1]={1<<8|reg};
+    SSD_SPI_Write(b1,1);
+    for(int i=0;i<len-1;i++){
+        uint16_t b2[1]={1<<8|data[i]};
+        SSD_SPI_Write(b2,1);
+    }
 }
 void SSD_MIPI_WriteLongDCS(uint8_t reg,uint16_t* data,int len){
     SSD_SPI_WriteReg(0xb7,0x0050,2);
     SSD_SPI_WriteReg(0xb8,0x0000,2);
-
     SSD_SPI_WriteReg(0xbc,len,2);
-    if(len>1)SSD_SPI_WriteReg(0xbf,reg|(data[0]<<8),2);
-    if(len>2)SSD_SPI_WriteReg(0xbf,data[1]|(data[2]<<8),2);
+    uint16_t b0[1]={0xbf};
+    SSD_SPI_Write(b0,1);
+    uint16_t b1[1]={1<<8|reg};
+    SSD_SPI_Write(b1,1);
+    for(int i=0;i<len-1;i++){
+        uint16_t b2[1]={1<<8|data[i]};
+        SSD_SPI_Write(b2,1);
+    }
+
+}
+void SSD_MIPI_WriteShortGeneric(uint8_t reg,uint16_t data,int len){
+//    SSD_SPI_WriteReg(0xb7,0x0302,2);
+//    SSD_SPI_WriteReg(0xb8,0x0000,2);
+//
+//    SSD_SPI_WriteReg(0xbc,len,2);
+//    SSD_SPI_WriteReg(0xbf,reg|(data<<8),2);
+    uint16_t b[2]={data&0xff,data>>8};
+    SSD_MIPI_WriteLongGeneric(reg,b,len);
+}
+void SSD_MIPI_WriteShortDCS(uint8_t reg,uint16_t data,int len){
+//    SSD_SPI_WriteReg(0xb7,0x0050,2);
+//    SSD_SPI_WriteReg(0xb8,0x0000,2);
+//
+//    SSD_SPI_WriteReg(0xbc,len,2);
+//    SSD_SPI_WriteReg(0xbf,reg|(data<<8),2);
+    uint16_t b[2]={data&0xff,data>>8};
+    SSD_MIPI_WriteLongDCS(reg,b,len);
+}
+uint16_t SSD_MIPI_ReadGeneric(uint8_t reg,uint16_t *len, uint16_t *status){
+    SSD_SPI_WriteReg(0xb7,0x0382,2);
+    SSD_SPI_WriteReg(0xc1,0x00ff,2);
+    SSD_SPI_WriteReg(0xc0,0x0001,2);
+
+    SSD_SPI_WriteReg(0xbc,0x0001,2);
+    SSD_SPI_WriteReg(0xbf,reg,2);
+    if(len!=0){
+        *len=SSD_SPI_ReadReg(0xc2);
+    }
+    if(status!=0){  //0 - no error; 1 - read not ready
+        if((SSD_SPI_ReadReg(0xc6)&1)==0){
+            *status=1;
+        }else{
+            *status=0;
+        }
+        if(SSD_SPI_ReadReg(0xc3)!=0){
+            *status=2;
+        }else{
+            *status=0;
+        }
+    }
+    return SSD_SPI_ReadReg(0xff);
+}
+uint16_t SSD_MIPI_ReadDCS(uint8_t reg,uint16_t *len, uint16_t *status){
+    SSD_SPI_WriteReg(0xb7,0x03c2,2);
+    SSD_SPI_WriteReg(0xc1,0x00ff,2);
+    SSD_SPI_WriteReg(0xc0,0x0001,2);
+
+    SSD_SPI_WriteReg(0xbc,0x0001,2);
+    SSD_SPI_WriteReg(0xbf,reg,2);
+    if(len!=0){
+        *len=SSD_SPI_ReadReg(0xc2);
+    }
+    if(status!=0){
+        if((SSD_SPI_ReadReg(0xc6)&1)==0){
+            *status=1;
+        }else{
+            *status=0;
+        }
+        if(SSD_SPI_ReadReg(0xc3)!=0){
+            *status=2;
+        }else{
+            *status=0;
+        }
+    }
+    return SSD_SPI_ReadReg(0xff);
 }
 /* USER CODE END 0 */
 
@@ -204,10 +268,10 @@ int main(void)
       SSD_MIPI_WriteShortGeneric(0x00,0x00,1);
       SSD_MIPI_WriteShortGeneric(0xd6,0x01,2);
       uint16_t ld[3]={0x0f,0xff,0};
-     // SSD_MIPI_WriteLongDCS(0x51,ld,3);
+      SSD_MIPI_WriteLongDCS(0x51,ld,3);
       SSD_MIPI_WriteShortDCS(0x53,0x04,2);
-      SSD_MIPI_WriteShortGeneric(0x29,0x00,1);
-      SSD_MIPI_WriteShortGeneric(0x11,0x00,1);
+      SSD_MIPI_WriteShortDCS(0x29,0x00,1);
+      SSD_MIPI_WriteShortDCS(0x11,0x00,1);
 
 //
       SSD_SPI_WriteReg(0xb6,0xc003,2);
@@ -216,29 +280,10 @@ int main(void)
       SSD_SPI_WriteReg(0xb7,0x024b,2);
 
       //------------------------------------
-      volatile uint16_t r,r1,r2,r3,r4;
-      SSD_SPI_WriteReg(0xb7,0x0382,2);
-      SSD_SPI_WriteReg(0xc1,0x000a,2);
-      SSD_SPI_WriteReg(0xc0,0x0001,2);
-
-      SSD_SPI_WriteReg(0xbc,0x0001,2);
-      SSD_SPI_WriteReg(0xbf,0x00b0,2);
-
-
-      r=SSD_SPI_ReadReg(0xb0);
-      r1= SSD_SPI_ReadReg(0xc2);
-      r2= SSD_SPI_ReadReg(0xff);
-
-      SSD_SPI_WriteReg(0xb7,0x03c2,2);
-      SSD_SPI_WriteReg(0xc1,0x000a,2);
-      SSD_SPI_WriteReg(0xc0,0x0001,2);
-
-      SSD_SPI_WriteReg(0xbc,0x0001,2);
-      SSD_SPI_WriteReg(0xbf,0x0053,2);
-
-      r3= SSD_SPI_ReadReg(0xc2);
-      r4= SSD_SPI_ReadReg(0xff);
-      r;r1;r2;r3;r4;
+      volatile uint16_t r,r1,r2,r3,r4,r5,r6;
+      r= SSD_MIPI_ReadGeneric(0xb0,&r1,&r2);
+      r3= SSD_MIPI_ReadDCS(0x51,&r4,&r5);
+      r;r1;r2;r3;r4;r5;
 
 
         //break;
