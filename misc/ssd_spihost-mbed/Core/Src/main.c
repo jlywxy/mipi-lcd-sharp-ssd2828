@@ -172,7 +172,7 @@ int main(void)
       //SSD_Reset();
 
       volatile uint16_t result=SSD_SPI_ReadReg(0xb0);
-      result=0|result;
+      result;
 
       SSD_SPI_WriteReg(0xb9,0x0001);
       SSD_SPI_WriteReg(0xb7,0x0300);
