@@ -7,13 +7,15 @@ Current Progress
 
 [ok] LCD with Specification
 [ok] SSD2828 SPI Transmission and Initialization
-[working] SSD2828 and LCD MIPI Configuration
+[ok] SSD2828 and LCD MIPI Configuration
 [ok] Circuit Schematic
 [ok] PCB Layout and MIPI Differential Layout
-[working] First Test and Debug
+[ok] First Test and Debug
 [  ] Final Test
 ```
 - --
+
+
 This project is managing to drive Sharp LS050T1SX01 using SSD2828(Solomon Systech).
 ```
 (any)  |  <- RGB interface
@@ -25,6 +27,16 @@ STM32  |  <- SPI
 Author: jlywxy<br>
 Document Version: 1.0.2
 - --
+
+## Availability Test
+1. Since this LCM need signal converting, a PCB is made, include power management.
+Checkout <a href="sharp_dsi_pcb">sharp_dsi_pcb</a> directory for PCB(using KiCad).
+
+2. Test method until now is using SSD2828 BIST mode to display color at full screen. However, some configuration may be still not correct and cause tearing.
+<img src="demo1-boardtest1.jpg" width=400/> 
+
+- --
+
 ## Circuit Schematic Suggestions
 
 1. Use reverse voltage generator IC for LCD AVDD+/-.<br>
@@ -100,19 +112,8 @@ This LCM requires 19.8v dual power with each 20mA current without internal backl
 
 The part number of Mating connector is AYF333135 of Panasonic, which has 31pins with crossing 0.3mm interval.
 
-<b>It's recommended to use other brands of connector, such as FH26W-31S from Hirose, which has more sustainability after soldering by iron.</b>
-
 This is the only one connector on the LCM to provide data/control/backlight lines.
-- --
 
-## Availability Test
-1. Since this LCM need signal converting, a PCB is made, include power management.
-
-< TO BE CONTINUED >
-
-2. The test method of availability is to show color flow gradient animation.
-
-< TO BE CONTINUED >
 
 - --
 
@@ -120,10 +121,10 @@ This is the only one connector on the LCM to provide data/control/backlight line
 
 0. Backlight power on.
 1. LCM VDD on, XRES.
-2. Initialize SSD2828: PLL, VSYNC/HSYNC, ...
+2. Initialize SSD2828: PLL, VSYNC/HSYNC, BIST...
 3. Write init conf to LCD via SSD2828 MIPI Packet
 4. Write 0x29,0x11 to LCD
-5. SSD2828 Enters HP Mode
+5. SSD2828 Enters HP Video Mode
 
 - --
 ## Misc
@@ -171,6 +172,10 @@ RGB101010 (not available in most of the displays, typical format of 1.07B color 
 RRRRRR RRRRGGGG GGGGGGBB BBBBBBBB (30 bits)
 ```
 
+* MIPI-DCS: DCS command and Generic command
+
+< To Be Continued >
+
 4. LCM
 
 * A abbreviation of Liquid Crystal Module, which includes LCD glass panel and backlight LEDs.
@@ -178,12 +183,3 @@ RRRRRR RRRRGGGG GGGGGGBB BBBBBBBB (30 bits)
 5. Low-Temperature Soldering Tin
 
 * A type of soldering tin which melting point is only 138 celsius high. It has 58% Bismuth(Bi) and 42% Stannum(Sn) to make such a low melting point. This temperature is so important for those not heat-resistant components such as LEDs and MEMS components. However, it's definitely not recommended for connector soldering, which will cause unsoldering and rosin-joint, because this type of soldering tin is fragile.
-
-### Additional Information of this Project
-From the start of this project, it was considered to use Chinese chips with more functionability as it said: Lontium LT7911D, LT8918, etc., but what's the most confusing is chips of most Chinese makers always did not open to share their product specifications, but only provide those informations to large conpanies or via unofficial way to give to personal DIY makers. 
-
-Most of the DIY makers that cannot contact the company are not able to do design using these chips, the only way to get datasheets is to find those from unofficial paid document websites or 'BBS which requires download coins', indicating for the project requires correctness and availability to avoid using Chinese chips without official support.
-
-Additionally, some of the Lontium resellers on the e-commerce websites even selling LT7911D DEMO boards (with basic circuits to drive the chip) up to about 30 dollars(400+ Chinese yuan) or more. Consider that SSD2828 was only priced below 1 dollar(8 Chinese yuan) per chip..!
-
-Excepting Solomon-Systech and Lontium solutions, the only left MIPI chip solution provider is Toshiba(東芝). However, it only provide chips in BGA that hard to work with soldering iron and bare hand.
