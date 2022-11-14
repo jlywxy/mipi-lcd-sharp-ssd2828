@@ -958,7 +958,7 @@ LOAD /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-non
                 0x0000000008000000                g_pfnVectors
                 0x00000000080000c0                . = ALIGN (0x4)
 
-.text           0x00000000080000c0     0x17b0
+.text           0x00000000080000c0     0x1788
                 0x00000000080000c0                . = ALIGN (0x4)
  *(.text)
  .text          0x00000000080000c0       0x48 /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/crtbegin.o
@@ -1001,220 +1001,220 @@ LOAD /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-non
                 0x000000000800048c       0x52 CMakeFiles/spihost.elf.dir/Core/Src/main.c.obj
                 0x000000000800048c                SystemClock_Config
  *fill*         0x00000000080004de        0x2 
- .text.main     0x00000000080004e0      0x1fc CMakeFiles/spihost.elf.dir/Core/Src/main.c.obj
+ .text.main     0x00000000080004e0      0x1d4 CMakeFiles/spihost.elf.dir/Core/Src/main.c.obj
                 0x00000000080004e0                main
  .text.MX_SPI1_Init
-                0x00000000080006dc       0x4c CMakeFiles/spihost.elf.dir/Core/Src/spi.c.obj
-                0x00000000080006dc                MX_SPI1_Init
+                0x00000000080006b4       0x4c CMakeFiles/spihost.elf.dir/Core/Src/spi.c.obj
+                0x00000000080006b4                MX_SPI1_Init
  .text.HAL_SPI_MspInit
-                0x0000000008000728       0x64 CMakeFiles/spihost.elf.dir/Core/Src/spi.c.obj
-                0x0000000008000728                HAL_SPI_MspInit
+                0x0000000008000700       0x64 CMakeFiles/spihost.elf.dir/Core/Src/spi.c.obj
+                0x0000000008000700                HAL_SPI_MspInit
  .text.HAL_MspInit
-                0x000000000800078c       0x30 CMakeFiles/spihost.elf.dir/Core/Src/stm32f0xx_hal_msp.c.obj
-                0x000000000800078c                HAL_MspInit
+                0x0000000008000764       0x30 CMakeFiles/spihost.elf.dir/Core/Src/stm32f0xx_hal_msp.c.obj
+                0x0000000008000764                HAL_MspInit
  .text.NMI_Handler
-                0x00000000080007bc        0x2 CMakeFiles/spihost.elf.dir/Core/Src/stm32f0xx_it.c.obj
-                0x00000000080007bc                NMI_Handler
+                0x0000000008000794        0x2 CMakeFiles/spihost.elf.dir/Core/Src/stm32f0xx_it.c.obj
+                0x0000000008000794                NMI_Handler
  .text.HardFault_Handler
-                0x00000000080007be        0x2 CMakeFiles/spihost.elf.dir/Core/Src/stm32f0xx_it.c.obj
-                0x00000000080007be                HardFault_Handler
+                0x0000000008000796        0x2 CMakeFiles/spihost.elf.dir/Core/Src/stm32f0xx_it.c.obj
+                0x0000000008000796                HardFault_Handler
  .text.SVC_Handler
-                0x00000000080007c0        0x2 CMakeFiles/spihost.elf.dir/Core/Src/stm32f0xx_it.c.obj
-                0x00000000080007c0                SVC_Handler
+                0x0000000008000798        0x2 CMakeFiles/spihost.elf.dir/Core/Src/stm32f0xx_it.c.obj
+                0x0000000008000798                SVC_Handler
  .text.PendSV_Handler
-                0x00000000080007c2        0x2 CMakeFiles/spihost.elf.dir/Core/Src/stm32f0xx_it.c.obj
-                0x00000000080007c2                PendSV_Handler
+                0x000000000800079a        0x2 CMakeFiles/spihost.elf.dir/Core/Src/stm32f0xx_it.c.obj
+                0x000000000800079a                PendSV_Handler
  .text.SysTick_Handler
-                0x00000000080007c4        0x8 CMakeFiles/spihost.elf.dir/Core/Src/stm32f0xx_it.c.obj
-                0x00000000080007c4                SysTick_Handler
+                0x000000000800079c        0x8 CMakeFiles/spihost.elf.dir/Core/Src/stm32f0xx_it.c.obj
+                0x000000000800079c                SysTick_Handler
  .text.SystemInit
-                0x00000000080007cc        0x2 CMakeFiles/spihost.elf.dir/Core/Src/system_stm32f0xx.c.obj
-                0x00000000080007cc                SystemInit
- *fill*         0x00000000080007ce        0x2 
+                0x00000000080007a4        0x2 CMakeFiles/spihost.elf.dir/Core/Src/system_stm32f0xx.c.obj
+                0x00000000080007a4                SystemInit
+ *fill*         0x00000000080007a6        0x2 
  .text.Reset_Handler
-                0x00000000080007d0       0x50 CMakeFiles/spihost.elf.dir/Core/Startup/startup_stm32f030f4px.s.obj
-                0x00000000080007d0                Reset_Handler
+                0x00000000080007a8       0x50 CMakeFiles/spihost.elf.dir/Core/Startup/startup_stm32f030f4px.s.obj
+                0x00000000080007a8                Reset_Handler
  .text.Default_Handler
-                0x0000000008000820        0x2 CMakeFiles/spihost.elf.dir/Core/Startup/startup_stm32f030f4px.s.obj
-                0x0000000008000820                TIM1_BRK_UP_TRG_COM_IRQHandler
-                0x0000000008000820                I2C1_IRQHandler
-                0x0000000008000820                SPI1_IRQHandler
-                0x0000000008000820                EXTI2_3_IRQHandler
-                0x0000000008000820                ADC1_IRQHandler
-                0x0000000008000820                TIM17_IRQHandler
-                0x0000000008000820                RTC_IRQHandler
-                0x0000000008000820                TIM16_IRQHandler
-                0x0000000008000820                TIM3_IRQHandler
-                0x0000000008000820                EXTI4_15_IRQHandler
-                0x0000000008000820                RCC_IRQHandler
-                0x0000000008000820                DMA1_Channel1_IRQHandler
-                0x0000000008000820                Default_Handler
-                0x0000000008000820                TIM14_IRQHandler
-                0x0000000008000820                DMA1_Channel4_5_IRQHandler
-                0x0000000008000820                EXTI0_1_IRQHandler
-                0x0000000008000820                WWDG_IRQHandler
-                0x0000000008000820                DMA1_Channel2_3_IRQHandler
-                0x0000000008000820                FLASH_IRQHandler
-                0x0000000008000820                USART1_IRQHandler
-                0x0000000008000820                TIM1_CC_IRQHandler
- *fill*         0x0000000008000822        0x2 
+                0x00000000080007f8        0x2 CMakeFiles/spihost.elf.dir/Core/Startup/startup_stm32f030f4px.s.obj
+                0x00000000080007f8                TIM1_BRK_UP_TRG_COM_IRQHandler
+                0x00000000080007f8                I2C1_IRQHandler
+                0x00000000080007f8                SPI1_IRQHandler
+                0x00000000080007f8                EXTI2_3_IRQHandler
+                0x00000000080007f8                ADC1_IRQHandler
+                0x00000000080007f8                TIM17_IRQHandler
+                0x00000000080007f8                RTC_IRQHandler
+                0x00000000080007f8                TIM16_IRQHandler
+                0x00000000080007f8                TIM3_IRQHandler
+                0x00000000080007f8                EXTI4_15_IRQHandler
+                0x00000000080007f8                RCC_IRQHandler
+                0x00000000080007f8                DMA1_Channel1_IRQHandler
+                0x00000000080007f8                Default_Handler
+                0x00000000080007f8                TIM14_IRQHandler
+                0x00000000080007f8                DMA1_Channel4_5_IRQHandler
+                0x00000000080007f8                EXTI0_1_IRQHandler
+                0x00000000080007f8                WWDG_IRQHandler
+                0x00000000080007f8                DMA1_Channel2_3_IRQHandler
+                0x00000000080007f8                FLASH_IRQHandler
+                0x00000000080007f8                USART1_IRQHandler
+                0x00000000080007f8                TIM1_CC_IRQHandler
+ *fill*         0x00000000080007fa        0x2 
  .text.HAL_InitTick
-                0x0000000008000824       0x50 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c.obj
-                0x0000000008000824                HAL_InitTick
+                0x00000000080007fc       0x50 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c.obj
+                0x00000000080007fc                HAL_InitTick
  .text.HAL_Init
-                0x0000000008000874       0x20 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c.obj
-                0x0000000008000874                HAL_Init
+                0x000000000800084c       0x20 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c.obj
+                0x000000000800084c                HAL_Init
  .text.HAL_IncTick
-                0x0000000008000894       0x18 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c.obj
-                0x0000000008000894                HAL_IncTick
+                0x000000000800086c       0x18 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c.obj
+                0x000000000800086c                HAL_IncTick
  .text.HAL_GetTick
-                0x00000000080008ac        0xc CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c.obj
-                0x00000000080008ac                HAL_GetTick
+                0x0000000008000884        0xc CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c.obj
+                0x0000000008000884                HAL_GetTick
  .text.HAL_Delay
-                0x00000000080008b8       0x24 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c.obj
-                0x00000000080008b8                HAL_Delay
+                0x0000000008000890       0x24 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c.obj
+                0x0000000008000890                HAL_Delay
  .text.HAL_NVIC_SetPriority
-                0x00000000080008dc       0x60 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c.obj
-                0x00000000080008dc                HAL_NVIC_SetPriority
+                0x00000000080008b4       0x60 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c.obj
+                0x00000000080008b4                HAL_NVIC_SetPriority
  .text.HAL_SYSTICK_Config
-                0x000000000800093c       0x38 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c.obj
-                0x000000000800093c                HAL_SYSTICK_Config
+                0x0000000008000914       0x38 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c.obj
+                0x0000000008000914                HAL_SYSTICK_Config
  .text.HAL_GPIO_Init
-                0x0000000008000974      0x18c CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.c.obj
-                0x0000000008000974                HAL_GPIO_Init
+                0x000000000800094c      0x18c CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.c.obj
+                0x000000000800094c                HAL_GPIO_Init
  .text.HAL_GPIO_WritePin
-                0x0000000008000b00        0xc CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.c.obj
-                0x0000000008000b00                HAL_GPIO_WritePin
+                0x0000000008000ad8        0xc CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.c.obj
+                0x0000000008000ad8                HAL_GPIO_WritePin
  .text.HAL_RCC_OscConfig
-                0x0000000008000b0c      0x49c CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
-                0x0000000008000b0c                HAL_RCC_OscConfig
+                0x0000000008000ae4      0x49c CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
+                0x0000000008000ae4                HAL_RCC_OscConfig
  .text.HAL_RCC_GetSysClockFreq
-                0x0000000008000fa8       0x70 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
-                0x0000000008000fa8                HAL_RCC_GetSysClockFreq
+                0x0000000008000f80       0x70 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
+                0x0000000008000f80                HAL_RCC_GetSysClockFreq
  .text.HAL_RCC_ClockConfig
-                0x0000000008001018      0x134 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
-                0x0000000008001018                HAL_RCC_ClockConfig
+                0x0000000008000ff0      0x134 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
+                0x0000000008000ff0                HAL_RCC_ClockConfig
  .text.SPI_WaitFlagStateUntilTimeout
-                0x000000000800114c       0xe8 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_spi.c.obj
+                0x0000000008001124       0xe8 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_spi.c.obj
  .text.SPI_WaitFifoStateUntilTimeout
-                0x0000000008001234      0x114 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_spi.c.obj
+                0x000000000800120c      0x114 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_spi.c.obj
  .text.SPI_EndRxTxTransaction
-                0x0000000008001348       0x68 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_spi.c.obj
+                0x0000000008001320       0x68 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_spi.c.obj
  .text.HAL_SPI_Init
-                0x00000000080013b0      0x104 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_spi.c.obj
-                0x00000000080013b0                HAL_SPI_Init
+                0x0000000008001388      0x104 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_spi.c.obj
+                0x0000000008001388                HAL_SPI_Init
  .text.HAL_SPI_Transmit
-                0x00000000080014b4      0x1b2 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_spi.c.obj
-                0x00000000080014b4                HAL_SPI_Transmit
- *fill*         0x0000000008001666        0x2 
+                0x000000000800148c      0x1b2 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_spi.c.obj
+                0x000000000800148c                HAL_SPI_Transmit
+ *fill*         0x000000000800163e        0x2 
  .text.__libc_init_array
-                0x0000000008001668       0x44 /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(lib_a-init.o)
-                0x0000000008001668                __libc_init_array
- .text.memset   0x00000000080016ac       0xa8 /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(lib_a-memset.o)
-                0x00000000080016ac                memset
+                0x0000000008001640       0x44 /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(lib_a-init.o)
+                0x0000000008001640                __libc_init_array
+ .text.memset   0x0000000008001684       0xa8 /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(lib_a-memset.o)
+                0x0000000008001684                memset
  .text.startup.register_fini
-                0x0000000008001754       0x18 /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(lib_a-__call_atexit.o)
- .text.atexit   0x000000000800176c       0x10 /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(lib_a-atexit.o)
-                0x000000000800176c                atexit
+                0x000000000800172c       0x18 /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(lib_a-__call_atexit.o)
+ .text.atexit   0x0000000008001744       0x10 /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(lib_a-atexit.o)
+                0x0000000008001744                atexit
  .text.__libc_fini_array
-                0x000000000800177c       0x28 /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(lib_a-fini.o)
-                0x000000000800177c                __libc_fini_array
+                0x0000000008001754       0x28 /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(lib_a-fini.o)
+                0x0000000008001754                __libc_fini_array
  .text.__retarget_lock_acquire_recursive
-                0x00000000080017a4        0x4 /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(lib_a-lock.o)
-                0x00000000080017a4                __retarget_lock_acquire_recursive
+                0x000000000800177c        0x4 /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(lib_a-lock.o)
+                0x000000000800177c                __retarget_lock_acquire_recursive
  .text.__retarget_lock_release_recursive
-                0x00000000080017a8        0x4 /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(lib_a-lock.o)
-                0x00000000080017a8                __retarget_lock_release_recursive
+                0x0000000008001780        0x4 /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(lib_a-lock.o)
+                0x0000000008001780                __retarget_lock_release_recursive
  .text.__register_exitproc
-                0x00000000080017ac       0xac /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(lib_a-__atexit.o)
-                0x00000000080017ac                __register_exitproc
+                0x0000000008001784       0xac /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(lib_a-__atexit.o)
+                0x0000000008001784                __register_exitproc
  *(.glue_7)
- .glue_7        0x0000000008001858        0x0 linker stubs
+ .glue_7        0x0000000008001830        0x0 linker stubs
  *(.glue_7t)
- .glue_7t       0x0000000008001858        0x0 linker stubs
+ .glue_7t       0x0000000008001830        0x0 linker stubs
  *(.eh_frame)
- .eh_frame      0x0000000008001858        0x0 /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/crtbegin.o
+ .eh_frame      0x0000000008001830        0x0 /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/crtbegin.o
  *(.init)
- .init          0x0000000008001858        0x4 /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/crti.o
-                0x0000000008001858                _init
- .init          0x000000000800185c        0x8 /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/crtn.o
+ .init          0x0000000008001830        0x4 /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/crti.o
+                0x0000000008001830                _init
+ .init          0x0000000008001834        0x8 /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/crtn.o
  *(.fini)
- .fini          0x0000000008001864        0x4 /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/crti.o
-                0x0000000008001864                _fini
- .fini          0x0000000008001868        0x8 /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/crtn.o
-                0x0000000008001870                . = ALIGN (0x4)
-                0x0000000008001870                _etext = .
+ .fini          0x000000000800183c        0x4 /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/crti.o
+                0x000000000800183c                _fini
+ .fini          0x0000000008001840        0x8 /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/crtn.o
+                0x0000000008001848                . = ALIGN (0x4)
+                0x0000000008001848                _etext = .
 
-.vfp11_veneer   0x0000000008001870        0x0
- .vfp11_veneer  0x0000000008001870        0x0 linker stubs
+.vfp11_veneer   0x0000000008001848        0x0
+ .vfp11_veneer  0x0000000008001848        0x0 linker stubs
 
-.v4_bx          0x0000000008001870        0x0
- .v4_bx         0x0000000008001870        0x0 linker stubs
+.v4_bx          0x0000000008001848        0x0
+ .v4_bx         0x0000000008001848        0x0 linker stubs
 
-.iplt           0x0000000008001870        0x0
- .iplt          0x0000000008001870        0x0 /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/crtbegin.o
+.iplt           0x0000000008001848        0x0
+ .iplt          0x0000000008001848        0x0 /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/crtbegin.o
 
-.rodata         0x0000000008001870       0x44
-                0x0000000008001870                . = ALIGN (0x4)
+.rodata         0x0000000008001848       0x44
+                0x0000000008001848                . = ALIGN (0x4)
  *(.rodata)
- .rodata        0x0000000008001870        0x6 CMakeFiles/spihost.elf.dir/Core/Src/main.c.obj
+ .rodata        0x0000000008001848        0x6 CMakeFiles/spihost.elf.dir/Core/Src/main.c.obj
  *(.rodata*)
- *fill*         0x0000000008001876        0x2 
+ *fill*         0x000000000800184e        0x2 
  .rodata.AHBPrescTable
-                0x0000000008001878       0x10 CMakeFiles/spihost.elf.dir/Core/Src/system_stm32f0xx.c.obj
-                0x0000000008001878                AHBPrescTable
+                0x0000000008001850       0x10 CMakeFiles/spihost.elf.dir/Core/Src/system_stm32f0xx.c.obj
+                0x0000000008001850                AHBPrescTable
  .rodata.HAL_RCC_GetSysClockFreq.str1.4
-                0x0000000008001888       0x25 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
- *fill*         0x00000000080018ad        0x3 
+                0x0000000008001860       0x25 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
+ *fill*         0x0000000008001885        0x3 
  .rodata._global_impure_ptr
-                0x00000000080018b0        0x4 /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(lib_a-impure.o)
-                0x00000000080018b0                _global_impure_ptr
-                0x00000000080018b4                . = ALIGN (0x4)
+                0x0000000008001888        0x4 /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(lib_a-impure.o)
+                0x0000000008001888                _global_impure_ptr
+                0x000000000800188c                . = ALIGN (0x4)
 
-.rel.dyn        0x00000000080018b4        0x0
- .rel.iplt      0x00000000080018b4        0x0 /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/crtbegin.o
+.rel.dyn        0x000000000800188c        0x0
+ .rel.iplt      0x000000000800188c        0x0 /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/crtbegin.o
 
-.ARM.extab      0x00000000080018b4        0x0
-                0x00000000080018b4                . = ALIGN (0x4)
+.ARM.extab      0x000000000800188c        0x0
+                0x000000000800188c                . = ALIGN (0x4)
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x00000000080018b4                . = ALIGN (0x4)
+                0x000000000800188c                . = ALIGN (0x4)
 
-.ARM            0x00000000080018b4        0x0
-                0x00000000080018b4                . = ALIGN (0x4)
-                0x00000000080018b4                __exidx_start = .
+.ARM            0x000000000800188c        0x0
+                0x000000000800188c                . = ALIGN (0x4)
+                0x000000000800188c                __exidx_start = .
  *(.ARM.exidx*)
-                0x00000000080018b4                __exidx_end = .
-                0x00000000080018b4                . = ALIGN (0x4)
+                0x000000000800188c                __exidx_end = .
+                0x000000000800188c                . = ALIGN (0x4)
 
-.preinit_array  0x00000000080018b4        0x0
-                0x00000000080018b4                . = ALIGN (0x4)
-                0x00000000080018b4                PROVIDE (__preinit_array_start = .)
+.preinit_array  0x000000000800188c        0x0
+                0x000000000800188c                . = ALIGN (0x4)
+                0x000000000800188c                PROVIDE (__preinit_array_start = .)
  *(.preinit_array*)
-                0x00000000080018b4                PROVIDE (__preinit_array_end = .)
-                0x00000000080018b4                . = ALIGN (0x4)
+                0x000000000800188c                PROVIDE (__preinit_array_end = .)
+                0x000000000800188c                . = ALIGN (0x4)
 
-.init_array     0x00000000080018b4        0x8
-                0x00000000080018b4                . = ALIGN (0x4)
-                0x00000000080018b4                PROVIDE (__init_array_start = .)
+.init_array     0x000000000800188c        0x8
+                0x000000000800188c                . = ALIGN (0x4)
+                0x000000000800188c                PROVIDE (__init_array_start = .)
  *(SORT_BY_NAME(.init_array.*))
  .init_array.00000
-                0x00000000080018b4        0x4 /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(lib_a-__call_atexit.o)
+                0x000000000800188c        0x4 /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(lib_a-__call_atexit.o)
  *(.init_array*)
- .init_array    0x00000000080018b8        0x4 /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/crtbegin.o
-                0x00000000080018bc                PROVIDE (__init_array_end = .)
-                0x00000000080018bc                . = ALIGN (0x4)
+ .init_array    0x0000000008001890        0x4 /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/crtbegin.o
+                0x0000000008001894                PROVIDE (__init_array_end = .)
+                0x0000000008001894                . = ALIGN (0x4)
 
-.fini_array     0x00000000080018bc        0x4
-                0x00000000080018bc                . = ALIGN (0x4)
-                0x00000000080018bc                PROVIDE (__fini_array_start = .)
+.fini_array     0x0000000008001894        0x4
+                0x0000000008001894                . = ALIGN (0x4)
+                0x0000000008001894                PROVIDE (__fini_array_start = .)
  *(SORT_BY_NAME(.fini_array.*))
  *(.fini_array*)
- .fini_array    0x00000000080018bc        0x4 /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/crtbegin.o
-                0x00000000080018c0                PROVIDE (__fini_array_end = .)
-                0x00000000080018c0                . = ALIGN (0x4)
-                0x00000000080018c0                _sidata = LOADADDR (.data)
+ .fini_array    0x0000000008001894        0x4 /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/crtbegin.o
+                0x0000000008001898                PROVIDE (__fini_array_end = .)
+                0x0000000008001898                . = ALIGN (0x4)
+                0x0000000008001898                _sidata = LOADADDR (.data)
 
-.data           0x0000000020000000      0x43c load address 0x00000000080018c0
+.data           0x0000000020000000      0x43c load address 0x0000000008001898
                 0x0000000020000000                . = ALIGN (0x4)
                 0x0000000020000000                _sdata = .
  *(.data)
@@ -1240,11 +1240,11 @@ LOAD /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-non
                 0x000000002000043c                . = ALIGN (0x4)
                 0x000000002000043c                _edata = .
 
-.igot.plt       0x000000002000043c        0x0 load address 0x0000000008001cfc
+.igot.plt       0x000000002000043c        0x0 load address 0x0000000008001cd4
  .igot.plt      0x000000002000043c        0x0 /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/crtbegin.o
                 0x000000002000043c                . = ALIGN (0x4)
 
-.bss            0x000000002000043c       0x88 load address 0x0000000008001cfc
+.bss            0x000000002000043c       0x88 load address 0x0000000008001cd4
                 0x000000002000043c                _sbss = .
                 0x000000002000043c                __bss_start__ = _sbss
  *(.bss)
@@ -1264,7 +1264,7 @@ LOAD /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-non
                 0x00000000200004c4                __bss_end__ = _ebss
 
 ._user_heap_stack
-                0x00000000200004c4      0x604 load address 0x0000000008001cfc
+                0x00000000200004c4      0x604 load address 0x0000000008001cd4
                 0x00000000200004c8                . = ALIGN (0x8)
  *fill*         0x00000000200004c4        0x4 
                 [!provide]                        PROVIDE (end = .)
@@ -1339,19 +1339,19 @@ LOAD /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-non
 LOAD /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a
 LOAD /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a
 
-.debug_info     0x0000000000000000     0x6ca1
+.debug_info     0x0000000000000000     0x6c54
  .debug_info    0x0000000000000000      0x3b2 CMakeFiles/spihost.elf.dir/Core/Src/gpio.c.obj
- .debug_info    0x00000000000003b2     0x191a CMakeFiles/spihost.elf.dir/Core/Src/main.c.obj
- .debug_info    0x0000000000001ccc      0x918 CMakeFiles/spihost.elf.dir/Core/Src/spi.c.obj
- .debug_info    0x00000000000025e4      0x1b4 CMakeFiles/spihost.elf.dir/Core/Src/stm32f0xx_hal_msp.c.obj
- .debug_info    0x0000000000002798       0xe8 CMakeFiles/spihost.elf.dir/Core/Src/stm32f0xx_it.c.obj
- .debug_info    0x0000000000002880      0x28b CMakeFiles/spihost.elf.dir/Core/Src/system_stm32f0xx.c.obj
- .debug_info    0x0000000000002b0b       0x22 CMakeFiles/spihost.elf.dir/Core/Startup/startup_stm32f030f4px.s.obj
- .debug_info    0x0000000000002b2d      0x719 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c.obj
- .debug_info    0x0000000000003246      0x81c CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c.obj
- .debug_info    0x0000000000003a62      0x64a CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.c.obj
- .debug_info    0x00000000000040ac      0xa61 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
- .debug_info    0x0000000000004b0d     0x2194 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_spi.c.obj
+ .debug_info    0x00000000000003b2     0x18cd CMakeFiles/spihost.elf.dir/Core/Src/main.c.obj
+ .debug_info    0x0000000000001c7f      0x918 CMakeFiles/spihost.elf.dir/Core/Src/spi.c.obj
+ .debug_info    0x0000000000002597      0x1b4 CMakeFiles/spihost.elf.dir/Core/Src/stm32f0xx_hal_msp.c.obj
+ .debug_info    0x000000000000274b       0xe8 CMakeFiles/spihost.elf.dir/Core/Src/stm32f0xx_it.c.obj
+ .debug_info    0x0000000000002833      0x28b CMakeFiles/spihost.elf.dir/Core/Src/system_stm32f0xx.c.obj
+ .debug_info    0x0000000000002abe       0x22 CMakeFiles/spihost.elf.dir/Core/Startup/startup_stm32f030f4px.s.obj
+ .debug_info    0x0000000000002ae0      0x719 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c.obj
+ .debug_info    0x00000000000031f9      0x81c CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c.obj
+ .debug_info    0x0000000000003a15      0x64a CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.c.obj
+ .debug_info    0x000000000000405f      0xa61 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
+ .debug_info    0x0000000000004ac0     0x2194 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_spi.c.obj
 
 .debug_abbrev   0x0000000000000000     0x13fb
  .debug_abbrev  0x0000000000000000      0x15f CMakeFiles/spihost.elf.dir/Core/Src/gpio.c.obj
@@ -1407,19 +1407,19 @@ LOAD /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-non
  .debug_ranges  0x00000000000002f8       0x88 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
  .debug_ranges  0x0000000000000380      0x1c8 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_spi.c.obj
 
-.debug_line     0x0000000000000000     0x5ee8
+.debug_line     0x0000000000000000     0x5ee6
  .debug_line    0x0000000000000000      0x2da CMakeFiles/spihost.elf.dir/Core/Src/gpio.c.obj
- .debug_line    0x00000000000002da      0x837 CMakeFiles/spihost.elf.dir/Core/Src/main.c.obj
- .debug_line    0x0000000000000b11      0x445 CMakeFiles/spihost.elf.dir/Core/Src/spi.c.obj
- .debug_line    0x0000000000000f56      0x202 CMakeFiles/spihost.elf.dir/Core/Src/stm32f0xx_hal_msp.c.obj
- .debug_line    0x0000000000001158      0x199 CMakeFiles/spihost.elf.dir/Core/Src/stm32f0xx_it.c.obj
- .debug_line    0x00000000000012f1      0x2bb CMakeFiles/spihost.elf.dir/Core/Src/system_stm32f0xx.c.obj
- .debug_line    0x00000000000015ac       0xd8 CMakeFiles/spihost.elf.dir/Core/Startup/startup_stm32f030f4px.s.obj
- .debug_line    0x0000000000001684      0x640 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c.obj
- .debug_line    0x0000000000001cc4      0x5fa CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c.obj
- .debug_line    0x00000000000022be      0x747 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.c.obj
- .debug_line    0x0000000000002a05      0xc4b CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
- .debug_line    0x0000000000003650     0x2898 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_spi.c.obj
+ .debug_line    0x00000000000002da      0x835 CMakeFiles/spihost.elf.dir/Core/Src/main.c.obj
+ .debug_line    0x0000000000000b0f      0x445 CMakeFiles/spihost.elf.dir/Core/Src/spi.c.obj
+ .debug_line    0x0000000000000f54      0x202 CMakeFiles/spihost.elf.dir/Core/Src/stm32f0xx_hal_msp.c.obj
+ .debug_line    0x0000000000001156      0x199 CMakeFiles/spihost.elf.dir/Core/Src/stm32f0xx_it.c.obj
+ .debug_line    0x00000000000012ef      0x2bb CMakeFiles/spihost.elf.dir/Core/Src/system_stm32f0xx.c.obj
+ .debug_line    0x00000000000015aa       0xd8 CMakeFiles/spihost.elf.dir/Core/Startup/startup_stm32f030f4px.s.obj
+ .debug_line    0x0000000000001682      0x640 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c.obj
+ .debug_line    0x0000000000001cc2      0x5fa CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c.obj
+ .debug_line    0x00000000000022bc      0x747 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.c.obj
+ .debug_line    0x0000000000002a03      0xc4b CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
+ .debug_line    0x000000000000364e     0x2898 CMakeFiles/spihost.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_spi.c.obj
 
 .debug_str      0x0000000000000000     0x1dce
  .debug_str     0x0000000000000000      0x314 CMakeFiles/spihost.elf.dir/Core/Src/gpio.c.obj

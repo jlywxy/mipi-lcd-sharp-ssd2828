@@ -253,11 +253,10 @@ int main(void)
 //      id;
 //      continue;
       SSD_SPI_WriteReg(0xb7,0x0300,2);
-      SSD_SPI_WriteReg(0xb4,0x043e,2);
-      SSD_SPI_WriteReg(0xb5,0x0780,2);
+
       SSD_SPI_WriteReg(0xde,0x0003,2);
       SSD_SPI_WriteReg(0xb9,0x0000,2);
-      SSD_SPI_WriteReg(0xba,0x8028,2);
+
       SSD_SPI_WriteReg(0xb9,0x0001,2);
       SSD_SPI_WriteReg(0xb8,0x0000,2);
 //
@@ -286,7 +285,15 @@ int main(void)
       SSD_SPI_WriteReg(0xb7,0x0050,2);
       SSD_SPI_WriteReg(0xb8,0x0000,2);
       SSD_SPI_WriteReg(0xb9,0x0000,2);
-      SSD_SPI_WriteReg(0xba,0x8012,2);
+
+      //pll 8*62=496
+      // 8*124=992
+      //00 - 62.5-125, 01 - 126-250, 10 - 251-500, 11 - 501-1000
+      SSD_SPI_WriteReg(0xba,(0b11000000)<<8|124,2);
+
+      //polarity
+      SSD_SPI_WriteReg(0xb6,0b11000000<<8|0b00000011,2);
+
       SSD_SPI_WriteReg(0xbb,0x0007,2);
       SSD_SPI_WriteReg(0xb9,0x0001,2);
       SSD_SPI_WriteReg(0xc9,0x2302,2);
@@ -295,23 +302,30 @@ int main(void)
       SSD_SPI_WriteReg(0xcc,0x1005,2);
       SSD_SPI_WriteReg(0xd0,0x0000,2);
 
+//vsync,hsync width
+      SSD_SPI_WriteReg(0xb1,0x020a,2);
+//vbp,hbp
+      SSD_SPI_WriteReg(0xb2,(0<<8)|150,2);
 
-      SSD_SPI_WriteReg(0xb1,0x0802,2);
-      SSD_SPI_WriteReg(0xb2,0x1006,2);
-      SSD_SPI_WriteReg(0xb3,0x480e,2);
+//vfp,hfp
+      SSD_SPI_WriteReg(0xb3,(100<<8)|150,2);
 
-      SSD_SPI_WriteReg(0xb5,0x0438,2);
-      SSD_SPI_WriteReg(0xb4,0x0780,2);
+      //vact
+      SSD_SPI_WriteReg(0xb5,   1920-100,2);
+
+      //hact
+      SSD_SPI_WriteReg(0xb4,1080-100,2);
 
 
-
-      SSD_SPI_WriteReg(0xb6,0x0003|(0b1100<<8),2);
+        //rgb mode
+      SSD_SPI_WriteReg(0xb6,0b00001111|(0b00000000<<8),2);
 
       SSD_SPI_WriteReg(0xde,0x0003,2);
       SSD_SPI_WriteReg(0xd6,0x0005,2);
 
-
-      SSD_SPI_WriteReg(0xeb,0x0100,2);
+    //vga resolution
+//      SSD_SPI_WriteReg(0xeb,0x0100,2);
+      HAL_Delay(100);
       SSD_SPI_WriteReg(0xee,0x0600,2);
 
       SSD_SPI_WriteReg(0xb7,0x024b,2);

@@ -1,6 +1,6 @@
 # MIPI-DSI Interface LCD Driver for Sharp LS050T1SX01 using SSD2828
 
-Caution: this project is in a working process and not been done. Part of the document has not finished.
+Note: this project is in a working process, <b>but most part of the work has been done.</b> The document and code comments are still needed to be finshed and polished.
 <br>
 ```
 Current Progress
@@ -15,25 +15,35 @@ Current Progress
 ```
 - --
 
+Author: jlywxy<br>
+Document Version: 1.0.2
+- --
+## Content Catalog and Overview
+```
+Availability Test
+Circuit Schematic Suggestions
+PCB Layout and Manufacturing Suggestions
+Overview of the LCM Interface
+Display Workflow(Steps to light up display)
+Misc
+```
 
-This project is managing to drive Sharp LS050T1SX01 using SSD2828(Solomon Systech).
+This project is managing to drive Sharp LS050T1SX01 using SSD2828(Solomon Systech) and STM32F030F4P6.
 ```
 (any)  |  <- RGB interface
        v
        ---->  SSD2828 ------> Sharp LS050T1SX01
-       ^                 ^ MIPI DSI
+       ^                 ^ MIPI
 STM32  |  <- SPI
 ```
-Author: jlywxy<br>
-Document Version: 1.0.2
 - --
-
 ## Availability Test
 1. Since this LCM need signal converting, a PCB is made, include power management.
 Checkout <a href="sharp_dsi_pcb">sharp_dsi_pcb</a> directory for PCB(using KiCad).
 
-2. Test method until now is using SSD2828 BIST mode to display color at full screen. However, some configuration may be still not correct and cause tearing.
-<img src="demo1-boardtest1.jpg" width=400/> 
+2. Test method until now is using SSD2828 BIST mode to display color at full screen. <br>
+The testing signal frequency is 992 MHz (0.99GHz), with ideal frame rate at 120 Hz.<br>
+<img src="demo2-boardtest1.jpg" width=300/> 
 
 - --
 
@@ -64,6 +74,7 @@ Currently using ICL7660 from Renesas.
 * Do not use low temperature soldering tin (accurately 138(C)Bi-Sn), which is not rock-hard then spliting apart and cause <b>rosin joint</b>
 * Make connector direction easy for LCD connection.
 * Make soldering pad bigger to conveniently solder connector on the board.
+* To solder connector on the board using iron, put tin and rosin on the footprint of PCB, then remove them to make a thin layer. Put tin on the iron header, and put connector on the PCB, use iron header to touch connector pin, especially reload the tin in the pad on the PCB. If tin on the pad are gathering together, dip some rosin to the PCB to make them apart, or use copper strip to suck the tin off. After soldering, a visual check should be applied as: tin should connect the pad surface and connector pin, making a small tin curve; no tin is still gathering.
 3. For PCB Manufacturing
 * Use KiCad to plot Gerber and drill files, then zip the files and send to manufacture.
 * It is tested using JLCPCB to manufacture the board.
@@ -121,7 +132,7 @@ This is the only one connector on the LCM to provide data/control/backlight line
 
 0. Backlight power on.
 1. LCM VDD on, XRES.
-2. Initialize SSD2828: PLL, VSYNC/HSYNC, BIST...
+2. Initialize SSD2828: Set LP Mode, PLL, VSYNC/HSYNC, Color Mode, BIST...
 3. Write init conf to LCD via SSD2828 MIPI Packet
 4. Write 0x29,0x11 to LCD
 5. SSD2828 Enters HP Video Mode
@@ -183,3 +194,7 @@ RRRRRR RRRRGGGG GGGGGGBB BBBBBBBB (30 bits)
 5. Low-Temperature Soldering Tin
 
 * A type of soldering tin which melting point is only 138 celsius high. It has 58% Bismuth(Bi) and 42% Stannum(Sn) to make such a low melting point. This temperature is so important for those not heat-resistant components such as LEDs and MEMS components. However, it's definitely not recommended for connector soldering, which will cause unsoldering and rosin-joint, because this type of soldering tin is fragile.
+
+### Another performance tests
+1. SSD2828 and LCD overclock is viable.(See Availablity Test above)
+2. Using 3.3v or lower voltage for LCD AVDD+/- may still take the screen 'alive', but with lower brightness.
