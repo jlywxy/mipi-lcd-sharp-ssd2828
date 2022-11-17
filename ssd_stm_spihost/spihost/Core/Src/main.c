@@ -275,12 +275,17 @@ int main(void)
       SSD_MIPI_WriteShortGeneric(0x00,0x00,1);
       SSD_MIPI_WriteShortGeneric(0x00,0x00,1);
       SSD_MIPI_WriteShortGeneric(0xd6,0x01,2);
+      //brightness(backlight pwm)
       uint16_t ld[3]={0x0f,0xff,0};
       SSD_MIPI_WriteLongDCS(0x51,ld,3);
+      //pwm en
       SSD_MIPI_WriteShortDCS(0x53,0x04,2);
+      //te en
       SSD_MIPI_WriteShortDCS(0x35,0x00,2);
       SSD_MIPI_WriteShortDCS(0x29,0x00,1);
       SSD_MIPI_WriteShortDCS(0x11,0x00,1);
+
+
 //
       SSD_SPI_WriteReg(0xb7,0x0050,2);
       SSD_SPI_WriteReg(0xb8,0x0000,2);
@@ -337,7 +342,7 @@ int main(void)
       r= SSD_MIPI_ReadGeneric(0xb0,&r1,&r2);
       r3= SSD_MIPI_ReadDCS(0x51,&r4,&r5);
       r;r1;r2;r3;r4;r5;
-
+    break;
 
         //break;
       //------------------------------------

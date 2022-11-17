@@ -30,7 +30,7 @@ Checkout <a href="sharp_dsi_pcb">sharp_dsi_pcb</a> directory for PCB(KiCad).
 
 2. Test method until now is using SSD2828 BIST mode to display color at full screen. <br>
 The testing signal frequency is now 992 MHz (0.99GHz), with ideal frame rate at 120 Hz.<br>
-<img src="demo2-boardtest1.jpg" width=300/> 
+<img src="demo2-boardtest1.jpg" width=300/>
 
 - --
 
