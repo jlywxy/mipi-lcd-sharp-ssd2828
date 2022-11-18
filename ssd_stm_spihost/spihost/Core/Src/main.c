@@ -259,6 +259,35 @@ int main(void)
 
       SSD_SPI_WriteReg(0xb9,0x0001,2);
       SSD_SPI_WriteReg(0xb8,0x0000,2);
+      //vsync,hsync width
+      //SSD_SPI_WriteReg(0xb1,0x0101,2);
+//vbp,hbp
+      SSD_SPI_WriteReg(0xb2,2<<8|150,2);
+
+//vfp,hfp
+      SSD_SPI_WriteReg(0xb3,2<<8|150,2);
+
+      //vact
+      SSD_SPI_WriteReg(0xb5,   1920,2);
+
+      //hact
+      SSD_SPI_WriteReg(0xb4,1080,2);
+
+
+      SSD_SPI_WriteReg(0xb9,0x0000,2);
+
+      //pll 8*62=496
+      // 8*124=992
+      //00 - 62.5-125, 01 - 126-250, 10 - 251-500, 11 - 501-1000
+      SSD_SPI_WriteReg(0xba,(0b11000000)<<8|124,2);
+
+      //polarity
+      SSD_SPI_WriteReg(0xb6,0b11000000<<8|0b00000011,2);
+
+      SSD_SPI_WriteReg(0xbb,0x0007,2);
+      SSD_SPI_WriteReg(0xb9,0x0001,2);
+
+
 //
 //      SSD_SPI_WriteReg(0xb7,0x0050,2);
 //      SSD_SPI_WriteReg(0xb8,0x0000,2);
@@ -282,44 +311,28 @@ int main(void)
       SSD_MIPI_WriteShortDCS(0x53,0x04,2);
       //te en
       SSD_MIPI_WriteShortDCS(0x35,0x00,2);
-      SSD_MIPI_WriteShortDCS(0x29,0x00,1);
+
+      //lcd r63311 bist
+//      uint16_t ld2[6]={0x01,0xff,0x07,0x10,0x00,0x77};
+//      SSD_MIPI_WriteLongGeneric(0xde,ld2,7);
+//      SSD_MIPI_WriteShortGeneric(0xb3,0xd4,2);
+
       SSD_MIPI_WriteShortDCS(0x11,0x00,1);
+      HAL_Delay(150);
+      SSD_MIPI_WriteShortDCS(0x29,0x00,1);
 
 
 //
-      SSD_SPI_WriteReg(0xb7,0x0050,2);
-      SSD_SPI_WriteReg(0xb8,0x0000,2);
-      SSD_SPI_WriteReg(0xb9,0x0000,2);
+//      SSD_SPI_WriteReg(0xb7,0x0050,2);
+//      SSD_SPI_WriteReg(0xb8,0x0000,2);
 
-      //pll 8*62=496
-      // 8*124=992
-      //00 - 62.5-125, 01 - 126-250, 10 - 251-500, 11 - 501-1000
-      SSD_SPI_WriteReg(0xba,(0b11000000)<<8|124,2);
-
-      //polarity
-      SSD_SPI_WriteReg(0xb6,0b11000000<<8|0b00000011,2);
-
-      SSD_SPI_WriteReg(0xbb,0x0007,2);
-      SSD_SPI_WriteReg(0xb9,0x0001,2);
-      SSD_SPI_WriteReg(0xc9,0x2302,2);
+      SSD_SPI_WriteReg(0xc9,0x2102,2);
       SSD_SPI_WriteReg(0xca,0x0510,2);
       SSD_SPI_WriteReg(0xcb,0x1005,2);
       SSD_SPI_WriteReg(0xcc,0x1005,2);
       SSD_SPI_WriteReg(0xd0,0x0000,2);
 
-//vsync,hsync width
-      SSD_SPI_WriteReg(0xb1,0x020a,2);
-//vbp,hbp
-      SSD_SPI_WriteReg(0xb2,(0<<8)|150,2);
 
-//vfp,hfp
-      SSD_SPI_WriteReg(0xb3,(100<<8)|150,2);
-
-      //vact
-      SSD_SPI_WriteReg(0xb5,   1920-100,2);
-
-      //hact
-      SSD_SPI_WriteReg(0xb4,1080-100,2);
 
 
         //rgb mode
@@ -331,18 +344,25 @@ int main(void)
     //vga resolution
 //      SSD_SPI_WriteReg(0xeb,0x0100,2);
       HAL_Delay(100);
-      SSD_SPI_WriteReg(0xee,0x0600,2);
 
+
+      //lcd bist
+
+
+
+//      //ssd2828 bist
+      SSD_SPI_WriteReg(0xee,0x0600,2);
+//    //hs
       SSD_SPI_WriteReg(0xb7,0x024b,2);
      break;
 
 
       //------------------------------------
       volatile uint16_t r,r1,r2,r3,r4,r5,r6;
-      r= SSD_MIPI_ReadGeneric(0xb0,&r1,&r2);
-      r3= SSD_MIPI_ReadDCS(0x51,&r4,&r5);
+      r= SSD_MIPI_ReadGeneric(0xda,&r1,&r2);
+      r3= SSD_MIPI_ReadDCS(0xda,&r4,&r5);
       r;r1;r2;r3;r4;r5;
-    break;
+    //break;
 
         //break;
       //------------------------------------
