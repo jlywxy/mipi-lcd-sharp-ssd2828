@@ -1,10 +1,10 @@
 # MIPI-DSI Interface LCD Driver for Sharp LS050T1SX01 using SSD2828
 
-This project is managing to drive Sharp LS050T1SX01 using SSD2828(Solomon Systech) and STM32F030F4P6 from scratch.
+This project is managing to test the effect of PCB layout of MIPI-DSI differential and drive Sharp LS050T1SX01 using SSD2828(Solomon Systech) and STM32F030F4P6 from scratch.
 
 <img src="monazite-logo-lofi.png" width=80><br>
 Author: jlywxy (jlywxy@outlook.com)<br>
-Document Version: 1.1
+Document Version: 1.2
 - --
 ## Content Catalog and Overview
 ```
@@ -28,7 +28,9 @@ STM32  |  <- SPI
 1. A PCB is made, with features of MIPI differential layouts and reverse voltage generator circuits.<br>
 Checkout <a href="sharp_dsi_pcb">sharp_dsi_pcb</a> directory for PCB(KiCad).
 
-2. Test method until now is using SSD2828 BIST mode to display color at full screen. <br>
+The MIPI-DSI requires 100-Ohm differental impedance (100-Ohm of differential and 50-Ohm of single-ended). This board uses track width 7.1 mils, track spacing 6mils, track to copper filling area 6 mils, with board thickness of 1.6mm.
+
+2. Test method until now is using only SSD2828 BIST mode to display color at full screen. <br>
 The testing signal frequency is now 992 MHz (0.99GHz), with ideal frame rate at 120 Hz.<br>
 <img src="demo2-boardtest1.jpg" width=300/>
 
@@ -302,7 +304,7 @@ RRRRRR RRRRGGGG GGGGGGBB BBBBBBBB (30 bits)
 2. Using 3.3v or lower voltage for LCD AVDD+/- may still take the screen 'alive', but with lower brightness.
 
 ### Project status
-This project is in a working process, <b>but most part of the work has been done.</b> The document and code comments are still needed to be finshed and polished.
+This project works has been done.</b> The document and code comments are still needed to be finshed and polished.
 <br>
 ```
 Current Progress
@@ -313,5 +315,14 @@ Current Progress
 [ok] Circuit Schematic
 [ok] PCB Layout and MIPI Differential Layout
 [ok] First Test and Debug
-[  ] Final Test
+[cancelled] Final Test
 ```
+
+### Further Recommendations and Information
+1. Use one chip for LCD Backlight(Boost ciruits) and AVDD(Bias), as: TI LM36274, which includes Backlight Boost with Dimming, I2C control, and Bias voltage output.
+2. Use the same package of LDOs.
+3. Put connector to a more convenient position for LCD connection.
+4. Specification datasheets of LCDs, their controllers and standards are not included in this repository, since the author do not have their copyrights and not a member of any alliances(MIPI alliance, VESA, USB-IF, etc). Instead, however, they may be available to the public in some websites, which is the place to get the docs for non-commercial and development purposes.
+
+x. Stay informed of the new project of a USB-C single input external display hardware.
+
