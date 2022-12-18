@@ -4,7 +4,7 @@ This project is managing to test the effect of PCB layout of MIPI-DSI differenti
 
 <img src="monazite-logo-lofi.png" width=80><br>
 Author: jlywxy (jlywxy@outlook.com)<br>
-Document Version: 1.2
+Document Version: 1.3
 - --
 ## Content Catalog and Overview
 ```
@@ -30,8 +30,8 @@ Checkout <a href="sharp_dsi_pcb">sharp_dsi_pcb</a> directory for PCB(KiCad).
 
 The MIPI-DSI requires 100-Ohm differental impedance (100-Ohm of differential and 50-Ohm of single-ended). This board uses track width 7.1 mils, track spacing 6mils, track to copper filling area 6 mils, with board thickness of 1.6mm.
 
-2. Test method until now is using only SSD2828 BIST mode to display color at full screen. <br>
-The testing signal frequency is now 992 MHz (0.99GHz), with ideal frame rate at 120 Hz.<br>
+2. Test method until now is using SSD2828 BIST mode to display color at full screen and using the builtin test mode in the LCD. <br>
+The testing signal frequency output from SSD2828 is now 992 MHz (0.99GHz), with ideal frame rate at 120 Hz.<br>
 <img src="demo2-boardtest1.jpg" width=300/>
 
 - --
@@ -45,7 +45,7 @@ Currently using ICL7660 from Renesas.
 - --
 ## PCB Layout and Manufacturing Suggestions
 1. For MIPI Differential Layout
-* Do not use LCEDA to tune line length using the tuning function only for single-ended network. Use a more professional tool such as KiCad(in this project) or Altium, then use their tuning function for two lines of the differential, concurrently.
+* Do not use LCEDA to tune line length using the tuning function only for single-ended network. Use a more professional tool such as KiCad(using in this project)/Altium/Allegro, then use their tuning and simulation function for two lines of the differential concurrently.
 * The MIPI lines must cross the connector on the reverse side of the board, and make via holes between the pads in the connector.
 ```
 ------------------......
@@ -58,6 +58,7 @@ Currently using ICL7660 from Renesas.
 ("|"=pad, "ø"=via-holes)
 ```
 * Connect Differential GND actively to IC GND pins. KiCad won't fill copper region for those very thin unconnected pad with the most near copper region and cause potential EMI, even if DRC and ERC passed.
+* It's not very harsh for the differential layout. The line will work as it is if the impedance calculated correctly and lines close enough. The most fault may be impedance unmatching on the connector, which will be a more impact than line layouts. However, such a big problem on the connector will still not bring up the reason making diffenetial signaling into a false situation, since every high speed signal needs connector, no matter they are FPC connector nor even pins extended from chips, which pin pitch and chip packaging are always limited and varied. For example, the FPC connector used in this project has pin extending and chaning pitch in its mechanical structures, making no impedance warranty; some chips are packaged in 0.8mm-pitch BGA or even smaller, which will not make the exact impedance when applying layout for BGA pin fanouts. 
 2. For connector soldering and layout
 * Do not use heat gun to solder plastic components, even if temperature is lower than 260(C).
 * Do not use low temperature soldering tin (accurately 138(C)Bi-Sn), which is not rock-hard then spliting apart and cause <b>rosin joint</b>
@@ -206,40 +207,38 @@ uint16_t SSD_MIPI_ReadDCS(uint8_t reg,uint16_t *len, uint16_t *status){
 
 ### 1. Display Interface
 
-This LCM is using MIPI DSI and DCS interface.
+This LCM is using MIPI DSI differential signal interface.
 ```
 Sharp LS050T1SX01
 
-Electrical-Level    | Speed       | Driver IC
---------------------------------------------------
-1.2v-330mV-MIPI DSI | max 500 MHz | Renesas R63311
+Electrical-Level | Speed                | Driver IC
+--------------------------------------------------------
+1.2v/330mV-DSI   | max 500 MHz(typical) | Renesas R63311
 
 Wires                    | VDD Voltage
---------------------------------------------------
-1port,4lanes(2CLK+8Data) | 1.8/3.3v(digital), +5v & -5v(analog)
+---------------------------------------------------------
+1port,4lanes(2CLK+8Data) | 1.8/3.3v(digital), +/-5v(bias)
 ```
 
 ### 2. Backlight Interface
 
-This LCM requires 19.8v dual power with each 20mA current without internal backlight driver.
+This LCM requires 19.8v dual power with each 20mA current limit without internal backlight driver.
 
 ### 3. Connector
 
 The part number of Mating connector is AYF333135 of Panasonic, which has 31pins with crossing 0.3mm interval.
 
-This is the only one connector on the LCM to provide data/control/backlight lines.
-
+This is the only connector of the LCM to provide data/control/backlight connection.
 
 - --
 
 ## Display Workflow(Steps to light up display in Brief)
 
-0. Backlight power on.
-1. LCM VDD on, XRES.
-2. Initialize SSD2828: Set LP Mode, PLL, VSYNC/HSYNC, Color Mode, BIST... 
-3. Write init conf to LCD via SSD2828 MIPI Packet
-4. Write 0x29,0x11 to LCD
-5. SSD2828 Enters HP Video Mode
+0. Backlight power on. (Async)
+1. LCM/STM32/SSD2828 VDD/MVDD on; ICL7660 V+ on; LCM/SSD2828 XRES.
+2. Init SSD2828: set LP mode, PLL, VSYNC/HSYNC, color mode, BIST... 
+3. Init LCD via SSD2828: unlock command write, ..., DISPON, SLEEPOFF
+4. SSD2828 enters HS Video Mode, starting video transmission.
 
 - --
 ## Misc
@@ -256,7 +255,7 @@ RGB vertical stripe | IPS        | 8-bit(16.7M)
 
 Contrast | Color-Chromaticity | Backlight
 -------------------------------------------------
-1000:1   | 72% NTSC(sRGB)     | 450 nits
+1000:1   | 72% NTSC           | 450 nits（typical)
 ```
 
 ### Knowledge Bases of Concepts
@@ -326,3 +325,7 @@ Current Progress
 
 x. Stay informed of the new project of a USB-C single input external display hardware.
 
+### Document Patch
+1. Corrected the fause phrase of the paragraph "Display Workflow": "Enters HS Mode", rather than "Enters HP Mode". 
+2. Corrected LCD performance description of the paragraph "Misc": 72% NTSC is not fully equal to 100% sRGB.
+Patch above: 1.2->1.3 @2022.12.18,jlywxy
