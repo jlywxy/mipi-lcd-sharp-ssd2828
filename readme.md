@@ -1,36 +1,29 @@
-# MIPI-DSI Interface LCD Driver for Sharp LS050T1SX01 using SSD2828
+# Driving MIPI-DSI LCD(Sharp LS050T1SX01) using SSD2828
 
-This project is managing to test the effect of PCB layout of MIPI-DSI differential and drive Sharp LS050T1SX01 using SSD2828(Solomon Systech) and STM32F030F4P6 from scratch.
+This project is testing the PCB layout of MIPI-DSI high-speed differential and driving Sharp LS050T1SX01 using SSD2828(Solomon Systech) and STM32F030F4P6 from scratch.
 
 <img src="monazite-logo-lofi.png" width=80><br>
 Author: jlywxy (jlywxy@outlook.com)<br>
-Document Version: 1.3
+Document Version: 1.3r1
 - --
-## Content Catalog and Overview
+## Signal Wiring Brief
 ```
-Availability
-Circuit Schematic Suggestions
-PCB Layout and Manufacturing Suggestions
-Code Packaging For MIPI Packet Transfer
-Overview of the LCM Interface
-Display Workflow(Steps to light up display)
-Misc
-```
-```
-(any)  |  <- RGB interface
+(any)  |  
+       | < (parallel RGB)
        v
-       ---->  SSD2828 ------> Sharp LS050T1SX01
-       ^                 ^ MIPI
-STM32  |  <- SPI
+    SSD2828 ---------> Sharp LS050T1SX01
+       ^          ^ (MIPI-DSI)
+       | < (SPI)
+STM32  |  
 ```
 - --
-## Availability
-1. A PCB is made, with features of MIPI differential layouts and reverse voltage generator circuits.<br>
+## Intention of the project
+1. A PCB with MIPI-DSI high-speed differential layouts and reverse voltage generator circuits is made and tested.<br>
 Checkout <a href="sharp_dsi_pcb">sharp_dsi_pcb</a> directory for PCB(KiCad).
 
 The MIPI-DSI requires 100-Ohm differental impedance (100-Ohm of differential and 50-Ohm of single-ended). This board uses track width 7.1 mils, track spacing 6mils, track to copper filling area 6 mils, with board thickness of 1.6mm.
 
-2. Test method until now is using SSD2828 BIST mode to display color at full screen and using the builtin test mode in the LCD. <br>
+2. Test method is using SSD2828 BIST mode and LCD bist mode(provided by R63311) to display color at full screen and using the builtin test mode in the LCD. <br>
 The testing signal frequency output from SSD2828 is now 992 MHz (0.99GHz), with ideal frame rate at 120 Hz.<br>
 <img src="demo2-boardtest1.jpg" width=300/>
 
@@ -69,27 +62,28 @@ Currently using ICL7660 from Renesas.
 * Use KiCad to plot Gerber and drill files, then zip the files and send to manufacture.
 * It is tested using JLCPCB to manufacture the board.
 The gerber settings for JLCPCB manufacture should be modified as follow:
-```
----Gerber Options------------------------
-*[yes] Use Protel filename extensions
-*[no]  Generate Gerber job file
-*[yes] Subtract soldermask from silkscreen
 
-      Coordinate format: 4.6, unit mm
-*[no]  USe extended X2 format(recommended)
-*[no]  Include netlist attributes
-[no]  Disable aperture macros(not recommended)
+||-Gerber Options-|
+|-|-|
+|*[yes]|Use Protel filename extensions|
+|*[no]|Generate Gerber job file|
+|*[yes]|Subtract soldermask from silkscreen|
+4.6, unit mm|Coordinate format|
+|*[no]|USe extended X2 format(recommended)|
+|*[no]|Include netlist attributes|
+|[no]|Disable aperture macros(not recommended)|
 
----Drill Units------------------------
-*[yes] Millimeters
-[no]  Inches
+||-Drill Units-|
+|-|-|
+|*[yes]|Millimeters|
+|[no]|Inches|
 
-*: modified options compared to the default settings
-```
+Note: *=modified options compared to the default settings
+
 4. If some IC provided suggested circuit PCB layout, follow their instructions.
 - --
 ## Code Packaging For MIPI Packet Transfer
-* Functions realized: 
+* Functions implemented: 
 ```
 1. setting/reading SSD2828 registers, 
 2. writing MIPI short/long DCS/General registers/commands,
@@ -203,39 +197,38 @@ uint16_t SSD_MIPI_ReadDCS(uint8_t reg,uint16_t *len, uint16_t *status){
 ```
 
 - --
-## Overview of the LCM Interface 
+## Overview of the LCD Module
 
 ### 1. Display Interface
 
-This LCM is using MIPI DSI differential signal interface.
-```
-Sharp LS050T1SX01
+This LCD is using MIPI DSI differential signal interface.
 
-Electrical-Level | Speed                | Driver IC
---------------------------------------------------------
-1.2v/330mV-DSI   | max 500 MHz(typical) | Renesas R63311
 
-Wires                    | VDD Voltage
----------------------------------------------------------
-1port,4lanes(2CLK+8Data) | 1.8/3.3v(digital), +/-5v(bias)
-```
+| Signal Electrical-Level | Speed | Driver IC |
+|-|-|-|
+|1.2v-330mV-MIPI-DSI   | 500 MHz | Renesas R63311
+
+|Signal Wires| Power Supply|
+|-|-|
+|1-port-MIPI-DSI(4lanes(2 clk, 8 data) | VDD(1.8, 3.3v), Bias(±5v)|
+
 
 ### 2. Backlight Interface
 
-This LCM requires 19.8v dual power with each 20mA current limit without internal backlight driver.
+This LCD requires 19.8v dual power with each 20mA current limit without internal backlight driver.
 
 ### 3. Connector
 
 The part number of Mating connector is AYF333135 of Panasonic, which has 31pins with crossing 0.3mm interval.
 
-This is the only connector of the LCM to provide data/control/backlight connection.
+This is the only connector of the LCD to provide data/control/backlight connection.
 
 - --
 
 ## Display Workflow(Steps to light up display in Brief)
 
 0. Backlight power on. (Async)
-1. LCM/STM32/SSD2828 VDD/MVDD on; ICL7660 V+ on; LCM/SSD2828 XRES.
+1. LCD/STM32/SSD2828 VDD/MVDD on; ICL7660 V+ on; LCD/SSD2828 XRES.
 2. Init SSD2828: set LP mode, PLL, VSYNC/HSYNC, color mode, BIST... 
 3. Init LCD via SSD2828: unlock command write, ..., DISPON, SLEEPOFF
 4. SSD2828 enters HS Video Mode, starting video transmission.
@@ -243,30 +236,28 @@ This is the only connector of the LCM to provide data/control/backlight connecti
 - --
 ## Misc
 
-### LCM Optical Characteristics
-
-```
-Sharp LS050T1SX01
-
-Pixel-Arrangement   | Panel-Type | Color-Depth
--------------------------------------------------
-RGB vertical stripe | IPS        | 8-bit(16.7M)
+### LCD Module Optical Characteristics
 
 
-Contrast | Color-Chromaticity | Backlight
--------------------------------------------------
-1000:1   | 72% NTSC           | 450 nits（typical)
-```
+|Pixel-Arrangement   | Panel-Type | Color-Depth|
+|---------------------|-------------|---------------|
+|RGB vertical stripe | IPS        | 8bit (16.7M)|
+
+
+|Contrast | Color-Chromaticity | Backlight|
+|----------|--------------------|-------------------|
+|1000:1   | 72% NTSC           | 450 nits|
+
 
 ### Knowledge Bases of Concepts
 1. MIPI DSI
 * The MIPI Alliance defines modern interface of mobile devices like phones, including display, cameras, etc. 
 
-< TO BE CONTINUED >
+<-- To Be Continued -->
 
 2. MIPI DCS: DCS command and Generic command
 
-< To Be Continued >
+<-- To Be Continued -->
 
 3. MIPI DPI
 
@@ -290,11 +281,7 @@ RGB101010 (not available in most of the displays, typical format of 1.07B color 
 RRRRRR RRRRGGGG GGGGGGBB BBBBBBBB (30 bits)
 ```
 
-4. LCM
-
-* A abbreviation of Liquid Crystal Module, which includes LCD glass panel and backlight LEDs.
-
-5. Low-Temperature Soldering Tin
+4. Low-Temperature Soldering Tin
 
 * A type of soldering tin which melting point is only 138 celsius high. It has 58% Bismuth(Bi) and 42% Stannum(Sn) to make such a low melting point. This temperature is so important for those not heat-resistant components such as LEDs and MEMS components. However, it's definitely not recommended for connector soldering, which will cause unsoldering and rosin-joint, because this type of soldering tin is fragile.
 
@@ -308,13 +295,14 @@ This project works has been done.</b> The document and code comments are still n
 ```
 Current Progress
 
-[ok] LCD with Specification
-[ok] SSD2828 SPI Transmission and Initialization
-[ok] SSD2828 and LCD MIPI Configuration
-[ok] Circuit Schematic
-[ok] PCB Layout and MIPI Differential Layout
-[ok] First Test and Debug
-[cancelled] Final Test
+[ok] finding LCD Specification sheet
+[ok] finding LCD Driver IC sheet
+[ok] SSD2828 SPI Transmission and Initialization setup
+[ok] SSD2828 and LCD MIPI configuration setup
+[ok] Circuit Schematic design
+[ok] PCB Layout and MIPI Differential Layout design
+[ok] Test and Debug
+(done)
 ```
 
 ### Further Recommendations and Information
@@ -323,9 +311,15 @@ Current Progress
 3. Put connector to a more convenient position for LCD connection.
 4. Specification datasheets of LCDs, their controllers and standards are not included in this repository, since the author do not have their copyrights and not a member of any alliances(MIPI alliance, VESA, USB-IF, etc). Instead, however, they may be available to the public in some websites, which is the place to get the docs for non-commercial and development purposes.
 
-x. Stay informed of the new project of a USB-C single input external display hardware.
+5. Stay informed of a new project of a USB-C single input (usb-c alternative mode/billboard device, integrated power boost circuits) external display hardware(the "udisplay").
 
-### Document Patch
-1. Corrected the fause phrase of the paragraph "Display Workflow": "Enters HS Mode", rather than "Enters HP Mode". 
-2. Corrected LCD performance description of the paragraph "Misc": 72% NTSC is not fully equal to 100% sRGB.
-Patch above: 1.2->1.3 @2022.12.18,jlywxy
+### Document Patch and Errata
+
+* Corrected the fause phrase in the paragraph "Display Workflow": corrected to "Enters HS Mode", rather than formerly "Enters HP Mode". 
+* Corrected LCD performance description of the paragraph "Misc".  72% NTSC is not fully equal to 100% sRGB.<br>
+
+patch above: jlywxy@2022.12.18
+
+* Fixed document format problem: charts.<br>
+
+patch above: jlywxy@2023.2.8<br>
