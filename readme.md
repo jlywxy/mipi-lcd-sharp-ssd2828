@@ -1,10 +1,10 @@
 # Driving MIPI-DSI LCD(Sharp LS050T1SX01) using SSD2828
 
-This project is testing the PCB layout of MIPI-DSI high-speed differential and driving Sharp LS050T1SX01 using SSD2828(Solomon Systech) and STM32F030F4P6 from scratch.
+This project is testing the PCB layout of MIPI D-PHY high-speed differential and driving Sharp LS050T1SX01 using SSD2828 D-PHY and DSI bridge(Solomon Systech) and STM32F030F4 from scratch.
 
 <img src="monazite-logo-lofi.png" width=80><br>
 Author: jlywxy (jlywxy@outlook.com)<br>
-Document Version: 1.3r1
+Document Version: 1.4
 - --
 ## Signal Wiring Brief
 ```
@@ -12,18 +12,15 @@ Document Version: 1.3r1
        | < (parallel RGB)
        v
     SSD2828 ---------> Sharp LS050T1SX01
-       ^          ^ (MIPI-DSI)
+       ^       ^ (MIPI D-PHY & DSI)
        | < (SPI)
 STM32  |  
 ```
 - --
 ## Intention of the project
-1. A PCB with MIPI-DSI high-speed differential layouts and reverse voltage generator circuits is made and tested.<br>
-Checkout <a href="sharp_dsi_pcb">sharp_dsi_pcb</a> directory for PCB(KiCad).
-
-The MIPI-DSI requires 100-Ohm differental impedance (100-Ohm of differential and 50-Ohm of single-ended). This board uses track width 7.1 mils, track spacing 6mils, track to copper filling area 6 mils, with board thickness of 1.6mm.
-
-2. Test method is using SSD2828 BIST mode and LCD bist mode(provided by R63311) to display color at full screen and using the builtin test mode in the LCD. <br>
+1. A PCB is made and tested, with MIPI D-PHY high-speed differential layouts and reverse voltage generator circuits.<br>
+Checkout <a href="sharp_dsi_pcb">sharp_dsi_pcb</a> directory for PCB designed using KiCad.
+2. Test method is using SSD2828 BIST mode and LCD bist mode (provided by LCD driver R63311) to display color at full screen and using the builtin test mode in the LCD. <br>
 The testing signal frequency output from SSD2828 is now 992 MHz (0.99GHz), with ideal frame rate at 120 Hz.<br>
 <img src="demo2-boardtest1.jpg" width=300/>
 
@@ -36,10 +33,20 @@ Currently using ICL7660 from Renesas.
 2. Put KiCad PWR_FLAG at VBUS/GND at USB-C connector.
 3. Use 3.3v LDO to VDDIO for LCD, SSD2828 and STM32.
 - --
+
+## High-Speed Signal Integrity for D-PHY
+
+1. The board in this project is 2-layered, with the coplanar impedance control.<br>
+2. Make sure D-PHY differential wiring has 100-Ohm differential impedance and 50-Ohm single end impedance. ()<br>
+The width and space of the wiring should be calculated by the PCB impedance calculator or EDA-integrated tools. <br>
+In this board, the Coplanar Differential Impedance is used. Since the restriction of 2-layer board, <b>the final impedance was controlled as 100-Ohm differential and 68-Ohm single-ended.</b><br>
+
+* Note: for the difference of MIPI DSI and MIPI D-PHY, refer to `Misc->Knowledge Bases of Concepts` in this article.
+
 ## PCB Layout and Manufacturing Suggestions
-1. For MIPI Differential Layout
-* Do not use LCEDA to tune line length using the tuning function only for single-ended network. Use a more professional tool such as KiCad(using in this project)/Altium/Allegro, then use their tuning and simulation function for two lines of the differential concurrently.
-* The MIPI lines must cross the connector on the reverse side of the board, and make via holes between the pads in the connector.
+1. For D-PHY Differential Layout
+* Use a professional tool to design such a high-speed board, such as KiCad(using in this project)/Altium/Cadence.
+* The D-PHY lines have to use vias going into the internal space of the connector.
 ```
 ------------------......
 | | | | | | |
@@ -50,8 +57,6 @@ Currently using ICL7660 from Renesas.
 
 ("|"=pad, "ø"=via-holes)
 ```
-* Connect Differential GND actively to IC GND pins. KiCad won't fill copper region for those very thin unconnected pad with the most near copper region and cause potential EMI, even if DRC and ERC passed.
-* It's not very harsh for the differential layout. The line will work as it is if the impedance calculated correctly and lines close enough. The most fault may be impedance unmatching on the connector, which will be a more impact than line layouts. However, such a big problem on the connector will still not bring up the reason making diffenetial signaling into a false situation, since every high speed signal needs connector, no matter they are FPC connector nor even pins extended from chips, which pin pitch and chip packaging are always limited and varied. For example, the FPC connector used in this project has pin extending and chaning pitch in its mechanical structures, making no impedance warranty; some chips are packaged in 0.8mm-pitch BGA or even smaller, which will not make the exact impedance when applying layout for BGA pin fanouts. 
 2. For connector soldering and layout
 * Do not use heat gun to solder plastic components, even if temperature is lower than 260(C).
 * Do not use low temperature soldering tin (accurately 138(C)Bi-Sn), which is not rock-hard then spliting apart and cause <b>rosin joint</b>
@@ -201,16 +206,16 @@ uint16_t SSD_MIPI_ReadDCS(uint8_t reg,uint16_t *len, uint16_t *status){
 
 ### 1. Display Interface
 
-This LCD is using MIPI DSI differential signal interface.
+This LCD is using MIPI D-PHY differential signal interface.
 
 
 | Signal Electrical-Level | Speed | Driver IC |
 |-|-|-|
-|1.2v-330mV-MIPI-DSI   | 500 MHz | Renesas R63311
+|1.2v-330mV-MIPI-D-PHY   | 500 MHz | Renesas R63311
 
 |Signal Wires| Power Supply|
 |-|-|
-|1-port-MIPI-DSI(4lanes(2 clk, 8 data) | VDD(1.8, 3.3v), Bias(±5v)|
+|1-port-MIPI-D-PHY(4lanes(2 clk, 8 data) | VDD(1.8, 3.3v), Bias(±5v)|
 
 
 ### 2. Backlight Interface
@@ -250,19 +255,24 @@ This is the only connector of the LCD to provide data/control/backlight connecti
 
 
 ### Knowledge Bases of Concepts
+
 1. MIPI DSI
 * The MIPI Alliance defines modern interface of mobile devices like phones, including display, cameras, etc. 
+* The DSI defined a protocol for LCD to transfer data at a fast speed using a serial bus.<br>
+Its applicational protocol is still DPI/RGB.<br>
+Since the protocol is complex, please refer to MIPI Alliance Standard for Display Serial Interface.
+2. MIPI D-PHY
+* The D-PHY defined the physical(electrical) specification for the high-speed transfer.<br>
+For more detailed information, please refer to MIPI Alliance Specification for D-PHY.
+3. MIPI DCS: DCS command and Generic command
+The DCS command set is defined by MIPI alliance, which are common and standard through different types of LCDs, such as 0x29/0x11. <br>
+For the detailed command list, refer to MIPI Alliance Specification for Display Command Set.
+The Generic command set was defined by the LCD manufacture out of the standard.<br>
 
-<-- To Be Continued -->
 
-2. MIPI DCS: DCS command and Generic command
+4. MIPI-DPI/RGB/LTDC
 
-<-- To Be Continued -->
-
-3. MIPI DPI
-
-
-* MIPI-DPI is one of the MIPI display interface series, which is well known as RGB/Parallel/LTDC interface. This interface splits control lines(HSYNC/VSYNC/DE) with data lines(RGB parallel lines). Since it uses single-ended signals(compared to MIPI-DSI), the max speed(clock speed) could be limited, but it can transfer full pixel data in one clock period(compared to serial interfaces). The color depth is configurable as RGB565/RGB666/RGB888 and more, which could also be 'hacked' to leave out some pins or branch some lines(when downsampling color depth, throw away certain LSB; when upsampling, branch certain MSB to LSB or connect certain LSB to GND).
+* MIPI Display Pixel Interface (MIPI-DPI) is one of the MIPI display interface series, which is well known as RGB/Parallel/LTDC interface. This interface splits control lines(HSYNC/VSYNC/DE) with data lines(RGB parallel lines). Since it uses single-ended signals(compared to MIPI D-PHY), the max speed(clock speed) could be limited, but it can transfer full pixel data in one clock period(compared to serial interfaces). The color depth is configurable as RGB565/RGB666/RGB888 and more, which could also be 'hacked' to leave out some pins or branch some lines(when downsampling color depth, throw away certain LSB; when upsampling, branch certain MSB to LSB or connect certain LSB to GND).
 ```
 RGB888 (typical format of 16.7M color display)
 -------------------------------------------------
@@ -306,6 +316,7 @@ Current Progress
 ```
 
 ### Further Recommendations and Information
+
 1. Use one chip for LCD Backlight(Boost ciruits) and AVDD(Bias), as: TI LM36274, which includes Backlight Boost with Dimming, I2C control, and Bias voltage output.
 2. Use the same package of LDOs.
 3. Put connector to a more convenient position for LCD connection.
@@ -323,3 +334,11 @@ patch above: jlywxy@2022.12.18
 * Fixed document format problem: charts.<br>
 
 patch above: jlywxy@2023.2.8<br>
+
+* Modified the PCB design tool restriction: LCEDA now being able to tune wire length of differential pair.<br>
+* Added Paragraph "High-Speed Signal Integrity" for more detailed D-PHY layout guide.<br>
+* Corrected the calling for D-PHY.
+* Implemented `Knowledge Bases of Concepts` part.
+
+patch above: jlywxy@2023.3.19<br>
+
